@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "../../../../repos/sandbox"
+		},
+		{
+			"name": "firebeetle_scratch",
+			"path": ".."
+		},
+		{
+			"path": "../../../../repos/platformio-examples"
+		}
+	],
+	"settings": {}
+}
