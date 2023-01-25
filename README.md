@@ -1,5 +1,4 @@
 # Cat GPS Tracker
-The
 
 ## Architecture
 An object-oriented approach to the software architecture has been taken. Classes have been defined on a component/funcational basis, e.g. there is a class for handling AWS, GPS and WiFi.
