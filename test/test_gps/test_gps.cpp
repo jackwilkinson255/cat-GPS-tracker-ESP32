@@ -12,6 +12,7 @@ WebUtils web;
 void setUp(void) {
     Serial.begin(115200);
     gps.setup(erase); // Erase data to begin with
+    delay(500);
     gps.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);
     gps.setup(logging);
 

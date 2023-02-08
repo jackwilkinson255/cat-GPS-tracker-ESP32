@@ -55,18 +55,27 @@ bool WebUtils::connectWifi(void){
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
+  //WiFi.setAutoReconnect
+
+
   Serial.println("Connecting to Wi-Fi");
 
-  while (WiFi.status() != WL_CONNECTED){
-    delay(500);
-    Serial.print(".");
+  uint32_t wifi_init_timer = millis();
+  uint32_t wifi_timer = millis();
+  while ((WiFi.status() != WL_CONNECTED) && ((wifi_timer - wifi_init_timer) < 10000)){
+    wifi_timer = millis();
   }
 
-  Serial.println("Connected to Wi-Fi");
-  Serial.print("Connected to ");
-  Serial.println(WIFI_SSID);
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  if (WiFi.status() == WL_CONNECTED){
+    Serial.println("Connected to Wi-Fi");
+    Serial.print("Connected to ");
+    Serial.println(WIFI_SSID);
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+  } else{
+    Serial.println("Failed to connect...");
+  }
+
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(200, "text/plain", "Hi! This is a sample response.");
@@ -139,7 +148,7 @@ void WebUtils::getCurrentDate(void){
 }
 
 
-void WebUtils::updateTimestamp()
+void WebUtils::updateTimestamp(void)
 {
   timeClient.update();
   this->getCurrentDate();
@@ -147,5 +156,15 @@ void WebUtils::updateTimestamp()
   sprintf(this->timestamp, "%02d-%02d-%02d %02d:%02d:%02d", \
           this->year, this->month, this->day, \
           this->hour, this->minute, this->seconds);
+}
+
+int WebUtils::getSignalStrength(void)
+{
+  return WiFi.RSSI();
+}
+
+bool WebUtils::wifiConnected(void)
+{
+  return WiFi.status() == WL_CONNECTED;
 }
 

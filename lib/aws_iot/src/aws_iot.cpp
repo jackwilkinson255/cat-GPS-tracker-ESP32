@@ -52,7 +52,6 @@ void AWSIOT::setup()
 
   while (!client.connect(THINGNAME)) {
     Serial.print(".");
-    delay(100);
   }
 
   if(!client.connected()){

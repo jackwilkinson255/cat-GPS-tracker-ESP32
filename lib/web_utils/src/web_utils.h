@@ -21,6 +21,9 @@ class WebUtils: public WebSerialClass
         void setCallbackVals(void);
         // String getCallback(void);
         void updateTimestamp(void);
+        int getSignalStrength(void);
+        bool wifiConnected(void);
+
 
 
     PRIVATE_TESTING:

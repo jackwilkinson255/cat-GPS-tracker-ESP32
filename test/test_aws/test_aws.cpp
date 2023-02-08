@@ -5,6 +5,9 @@
 AWSIOT aws;
 
 
+
+
+
 void setUp(void) {
     // set stuff up here
     Serial.begin(115200);

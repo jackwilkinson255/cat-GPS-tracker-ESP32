@@ -30,7 +30,7 @@ class GPS_Utils: public Adafruit_GPS
             char lon[10];// = "00000.00W";
         } gps_struct;
 
-        mode gps_mode;
+
 
         char timestamp[18];
         char location[22];
@@ -40,20 +40,26 @@ class GPS_Utils: public Adafruit_GPS
         void setup(mode modeType);
         void loop(void);
         void getData();
+        void getLocusInfo();
+        bool getLoggerStatus(void);
+        void startLogger(void);
+        void stopLogger(void);
+        mode gps_mode;
 
     PRIVATE_TESTING:
         void getLocation(void);
         void getTimestamp(void);
         void getFix(void);
         void getOtherInfo(void);
-        void startLogger(void);
-        void setupLogger(void);
+        void setupCommon(void);
         void loggerLoop(void);
+        void viewLoop(void);
         void setupDumpData(void);
         void setupEraseData(void);
         void dumpDataLoop(void);
         void formatDecimalMins(char sign, float loc, char *formatted);
-        // bool loggerStarted = false;
+        bool loggerStarted = false;
         HardwareSerial *p_gpsserial;
+
 
 };
